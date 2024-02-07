@@ -1,0 +1,40 @@
+<!-- mastermind_game.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind Game</title>
+</head>
+<body>
+    <h1>Welcome to Mastermind!</h1>
+    <p>Try to guess the 4-color code.</p>
+
+    <div id="result"></div>
+
+    <input type="text" id="userGuess" placeholder="Enter your guess (e.g., RGBY)">
+    <button onclick="submitGuess()">Submit Guess</button>
+
+    <script>
+        function submitGuess() {
+            var userGuess = document.getElementById("userGuess").value;
+
+            fetch('/submit_guess', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ guess: userGuess }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from Flask
+                document.getElementById("result").innerText = data.result || data.error;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

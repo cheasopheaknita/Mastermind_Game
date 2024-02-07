@@ -1,0 +1,125 @@
+<!-- mastermind_game.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        p {
+            color: #555;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        #userGuess {
+            padding: 10px;
+            margin-top: 10px;
+            width: 300px; /* Adjust the width as needed */
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #history {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #guessHistory li {
+            margin-bottom: 5px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .correct {
+            background-color: #2ecc71; /* Green for correct guesses */
+            color: #fff;
+        }
+
+        .incorrect {
+            background-color: #e74c3c; /* Red for incorrect guesses */
+            color: #fff;
+        }
+
+        #gameOverMessage {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Mastermind!</h1>
+    <p>You have 7 Try to guess the 4-color code.</p>
+
+    <div id="result"></div>
+
+    <input type="text" id="userGuess" placeholder="Enter your guess (e.g., RGBY)" size="30">
+    <button onclick="submitGuess()" id="guessButton">Submit Guess</button>
+
+    <div id="history">
+        <h3>Guess History:</h3>
+        <ul id="guessHistory"></ul>
+    </div>
+
+    <div id="gameOverMessage"></div>
+
+    <button onclick="restartGame()" id="restartButton" style="display: none;">Play Again</button>
+
+    <script>
+        var remainingGuesses = 7;
+
+        function submitGuess() {
+            if (remainingGuesses > 0) {
+                // Your existing code for submitting a guess
+
+                if (remainingGuesses === 0) {
+                    disableGuessInput();
+                    displayGameOverMessage();
+                    showRestartButton();
+                }
+            }
+        }
+
+        function restartGame() {
+            // Reset the game state
+            remainingGuesses = 7;
+            document.getElementById("userGuess").value = "";
+            document.getElementById("result").innerText = "";
+            document.getElementById("guessHistory").innerHTML = "";
+            document.getElementById("gameOverMessage").innerText = "";
+            hideRestartButton();
+
+            // Your existing code to enable input and submit button
+        }
+
+        function showRestartButton() {
+            document.getElementById("restartButton").style.display = "block";
+        }
+
+        function hideRestartButton() {
+            document.getElementById("restartButton").style.display = "none";
+        }
+    </script>
+</body>
+</html>
